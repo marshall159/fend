@@ -8,7 +8,7 @@ const textapi = new AYLIENTextAPI({
     application_id: process.env.API_ID,
     application_key: process.env.API_KEY
 });
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 8082;
 
 const app = express();
 
