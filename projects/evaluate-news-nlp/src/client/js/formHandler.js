@@ -24,16 +24,19 @@ async function handleSubmit(event) {
     // check what text was put into the form field
     let url = document.getElementById('name').value;
 
-    // TODO: Validate URL
-
-    const response = await postData(
-        'http://localhost:8082/aylien', { url }
-    );
-
-    console.log("::: Form Submitted :::");
-    console.log('response :>> ', response);
-
-    document.getElementById('results').innerHTML = response.sentences;
+    // Validate URL
+    if (Client.isValidURL(url)) {
+        const response = await postData(
+            'http://localhost:8082/aylien', { url }
+        );
+    
+        console.log("::: Form Submitted :::");
+        console.log('response :>> ', response);
+    
+        document.getElementById('results').innerHTML = response.sentences;
+    } else {
+        document.getElementById('results').innerHTML = 'Please input a valid URL';
+    }
 }
 
 export { handleSubmit }
