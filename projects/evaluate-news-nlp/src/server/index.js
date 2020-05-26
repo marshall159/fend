@@ -18,36 +18,26 @@ app.use(express.static('dist'));
 app.use(cors());
 app.use(bodyParser.json());
 
-// console.log(__dirname);
-
 app.get('/', function (req, res) {
-    // res.sendFile('dist/index.html')
-    // res.sendFile(path.resolve('src/client/views/index.html'))
     res.sendFile('dist/index.html');
-
-});
-
-// designates what port the app will listen to for incoming requests
-app.listen(PORT, function () {
-    console.log(`Example app listening on port ${PORT}!`);
 });
 
 app.post('/aylien', function (req, res) {
-    console.log('req :>> ', req.body);
-    // const { text } = req.body;
+    const { url } = req.body;
 
-    // textapi.sentiment({
-    //     text
-    // }, (error, response) => {
-    //     if (error === null) {
-    //         console.log(response);
-    //         res.send(response);
-    //     } else {
-    //         res.send(error);
-    //     }
-    // });
+    textapi.summarize({
+        url
+    }, (error, response) => {
+        if (error === null) {
+            console.log(response);
+            return res.send(response);
+        } else {
+            console.log(error);
+            return res.send(error);
+        }
+    });
+});
 
-    // console.log('text :>> ', text);
-
-    res.json('hello from aylien route');
+app.listen(PORT, function () {
+    console.log(`Example app listening on port ${PORT}!`);
 });

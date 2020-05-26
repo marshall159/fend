@@ -22,22 +22,18 @@ async function handleSubmit(event) {
     event.preventDefault()
 
     // check what text was put into the form field
-    let formText = document.getElementById('name').value;
+    let url = document.getElementById('name').value;
 
-    // const data = { formText: formText }
+    // TODO: Validate URL
 
     const response = await postData(
-        'http://localhost:8082/aylien', { formText }
+        'http://localhost:8082/aylien', { url }
     );
-    // checkForName(formText)
 
     console.log("::: Form Submitted :::");
     console.log('response :>> ', response);
-    // fetch('http://localhost:8080/test')
-    // .then(res => res.json())
-    // .then(function(res) {
-    //     document.getElementById('results').innerHTML = res.message
-    // })
+
+    document.getElementById('results').innerHTML = response.sentences;
 }
 
 export { handleSubmit }
