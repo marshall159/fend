@@ -29,10 +29,8 @@ app.post('/aylien', function (req, res) {
         url
     }, (error, response) => {
         if (error === null) {
-            console.log(response);
             return res.send(response);
         } else {
-            console.log(error);
             return res.send(error);
         }
     });
